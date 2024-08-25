@@ -22,7 +22,8 @@ const getAllAdmins = async (req, res) => {
 }
 
 const getAdminByName = async (req, res) => {
-	const admin = await getAdminByNameService(req.params.username)
+	const { username } = req.params
+	const admin = await getAdminByNameService(username)
 	res.status(200).json(admin)
 }
 

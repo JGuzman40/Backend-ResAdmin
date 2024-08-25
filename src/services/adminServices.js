@@ -1,4 +1,5 @@
 const { Admin } = require('../db')
+const { Op } = require('sequelize')
 
 const createAdminService = async (data) => {
 	const { username, password, email, SuscriptionId, imageUrl } = data
@@ -21,7 +22,7 @@ const getAllAdminsService = async () => {
 
 const getAdminByNameService = async (username) => {
 	const admin = await Admin.findOne({
-		where: { username: username, isActive: true },
+		where: { username: { [Op.iLike]: username }, isActive: true },
 	})
 	if (!admin) throw new Error('Administrador no encontrado')
 	return admin
